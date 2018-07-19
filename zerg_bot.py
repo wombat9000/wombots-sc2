@@ -8,9 +8,16 @@ class ZergBot(sc2.BotAI):
     async def on_step(self, iteration):
         larvae = self.units(UnitTypeId.LARVA)
 
+        hatchery = self.units(UnitTypeId.HATCHERY).random
+
         if larvae.exists:
             await self.maintainSupply(larvae.random)
             await self.trainDrone(larvae.random)
+
+        # print(dir(larvae.random))
+
+        if self.units(UnitTypeId.SPAWNINGPOOL) < 1 and self.can_afford(UnitTypeId.SPAWNINGPOOL):
+            await self.build(UnitTypeId.SPAWNINGPOOL, hatchery)
 
     async def maintainSupply(self, larva):
         if self.supply_left <= 3 and not self.already_pending(UnitTypeId.OVERLORD):

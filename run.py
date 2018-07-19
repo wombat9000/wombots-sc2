@@ -10,4 +10,4 @@ from zerg_bot import ZergBot
 run_game(maps.get("Abyssal Reef LE"), [
     Bot(Race.Zerg, ZergBot()),
     Computer(Race.Protoss, Difficulty.Easy)
-], realtime=True)
+], realtime=False)
