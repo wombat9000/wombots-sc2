@@ -1,5 +1,6 @@
 import sc2
 from sc2.constants import *
+from sc2.units import Units
 
 
 class ZergBot(sc2.BotAI):
@@ -17,7 +18,7 @@ class ZergBot(sc2.BotAI):
         if self.supply_left <= 3 and not self.already_pending(UnitTypeId.OVERLORD):
             await self.train_unit(UnitTypeId.OVERLORD, 0)
 
-    def select_larvae(self):
+    def select_larvae(self) -> Units:
         return self.units(UnitTypeId.LARVA)
 
     async def train_unit(self, unit_type, supply_cost):
