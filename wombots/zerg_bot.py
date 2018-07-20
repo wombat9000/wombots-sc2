@@ -21,7 +21,7 @@ class ZergBot(sc2.BotAI):
     def select_larvae(self) -> Units:
         return self.units(UnitTypeId.LARVA)
 
-    async def train_unit(self, unit_type, supply_cost):
+    async def train_unit(self, unit_type, supply_cost=0):
         larvae = self.select_larvae()
         if larvae.exists:
             if self.can_afford(unit_type) and self.supply_left >= supply_cost:
