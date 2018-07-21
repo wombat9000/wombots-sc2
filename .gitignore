@@ -7,8 +7,5 @@ lib/
 .pytest_cache/
 __pycache__/
 include/
-tests/__pycache__/
-venv/include/
 venv/pip-selfcheck.json
 venv/pyvenv.cfg
-wombots/__pycache__/
