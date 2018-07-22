@@ -5,6 +5,7 @@ from sc2 import run_game, maps, Race, Difficulty
 from sc2.ids.unit_typeid import UnitTypeId
 from sc2.player import Bot, Computer
 
+from wombots.composed_bot import Composer
 from wombots.zerg_bot import ZergBot
 
 POOL_12_BUILD_ORDER = Deque([
@@ -34,8 +35,7 @@ POOL_12_BUILD_ORDER = Deque([
     UnitTypeId.DRONE
 ])
 
-
 run_game(maps.get("Abyssal Reef LE"), [
-    Bot(Race.Zerg, ZergBot(POOL_12_BUILD_ORDER)),
+    Bot(Race.Zerg, Composer([ZergBot(POOL_12_BUILD_ORDER)])),
     Computer(Race.Protoss, Difficulty.Easy)
 ], realtime=True)

@@ -20,7 +20,7 @@ async def test_expand():
 
 
 @pytest.mark.asyncio
-async def test_cant_expand_if_cant_build():
+async def test_cannot_expand_if_cant_build():
     bot = initial_bot_state([])
     bot.can_build_building = Mock(return_value=False)
     expand_stub = Mock(return_value=None)

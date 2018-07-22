@@ -8,6 +8,8 @@ from sc2.units import Units
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from wombots.zerg_bot import *
+# noinspection PyUnresolvedReferences
+from wombots.composed_bot import *
 
 
 async def async_mock(val):
