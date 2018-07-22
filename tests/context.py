@@ -2,8 +2,8 @@ import os
 import sys
 from unittest.mock import Mock
 
-from sc2 import Race
-from sc2 import race_worker
+from sc2 import Race, race_worker
+from sc2.units import Units
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 

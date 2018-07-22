@@ -89,3 +89,31 @@ async def test_dont_build_structure_from_bo_without_drones():
 
     build_stub.assert_not_called()
     assert UnitTypeId.SPAWNINGPOOL in bot.build_order
+
+
+@pytest.mark.asyncio
+async def test_expand_if_hatchery_is_in_bo():
+    bot = initial_bot_state([UnitTypeId.HATCHERY])
+    add_unit_to_bot(UnitTypeId.HATCHERY, bot)
+    bot.can_build_building = Mock(return_value=True)
+    expand_stub = Mock(return_value=None)
+    bot.expand_now = asyncio.coroutine(expand_stub)
+
+    await bot.on_step(0)
+
+    expand_stub.assert_called()
+    assert UnitTypeId.HATCHERY not in bot.build_order
+
+
+@pytest.mark.asyncio
+async def test_not_expand_if_hatchery_is_in_bo_but_cant_build():
+    bot = initial_bot_state([UnitTypeId.HATCHERY])
+    add_unit_to_bot(UnitTypeId.HATCHERY, bot)
+    bot.can_build_building = Mock(return_value=False)
+    expand_stub = Mock(return_value=None)
+    bot.expand_now = asyncio.coroutine(expand_stub)
+
+    await bot.on_step(0)
+
+    expand_stub.assert_not_called()
+    assert UnitTypeId.HATCHERY in bot.build_order
