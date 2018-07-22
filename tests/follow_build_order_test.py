@@ -1,31 +1,11 @@
 import asyncio
-from typing import Deque
 from unittest.mock import Mock
 
 import pytest
-from sc2 import race_worker, Race
 from sc2.ids.unit_typeid import UnitTypeId
 from sc2.unit import Unit
-from sc2.units import Units
 
-from .context import ZergBot
-from .context import unit_mock_of
-
-
-def initial_bot_state(build_order) -> ZergBot:
-    bot = ZergBot(Deque(build_order))
-
-    bot.race = Race.Zerg
-    bot.units = Units([], Mock())
-    bot.supply_left = 10
-    return bot
-
-
-def add_unit_to_bot(unit_type: UnitTypeId, bot: ZergBot, ) -> Unit:
-    unit: Unit = unit_mock_of(unit_type)
-    bot.units.append(unit)
-    bot.workers = bot.units(race_worker[bot.race])
-    return unit
+from .context import add_unit_to_bot, initial_bot_state
 
 
 @pytest.mark.asyncio
