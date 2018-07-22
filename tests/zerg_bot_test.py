@@ -1,3 +1,5 @@
+import asyncio
+from typing import Deque
 from unittest.mock import Mock
 
 import pytest
@@ -8,13 +10,9 @@ from .context import ZergBot, UnitTypeId
 from .context import unit_mock_of
 
 
-async def async_mock(val):
-    return val
-
-
 @pytest.fixture
 def zerg_bot():
-    bot = ZergBot([])
+    bot = ZergBot(Deque([]))
     bot.do = Mock()
     bot.state = Mock()
     return bot
@@ -70,8 +68,9 @@ async def test_trains_if_sufficient_supply_and_funds(zerg_bot: ZergBot):
     zerg_bot.units = Units([larva], Mock())
     zerg_bot.can_afford = Mock(return_value=True)
     zerg_bot.supply_left = 1
-    zerg_bot.do = Mock(return_value=async_mock(None))
+    do_stub = Mock(return_value=None)
+    zerg_bot.do = asyncio.coroutine(do_stub)
 
     await zerg_bot.train_unit(UnitTypeId.DRONE)
 
-    zerg_bot.do.assert_called_with(larva.train(UnitTypeId.DRONE))
+    do_stub.assert_called_with(larva.train(UnitTypeId.DRONE))

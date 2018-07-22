@@ -22,6 +22,16 @@ POOL_12_BUILD_ORDER = Deque([
     UnitTypeId.DRONE,
     UnitTypeId.DRONE,
     UnitTypeId.OVERLORD,
+    UnitTypeId.OVERLORD,
+    UnitTypeId.OVERLORD,
+    UnitTypeId.DRONE,
+    UnitTypeId.DRONE,
+    UnitTypeId.DRONE,
+    UnitTypeId.DRONE,
+    UnitTypeId.DRONE,
+    UnitTypeId.DRONE,
+    UnitTypeId.DRONE,
+    UnitTypeId.DRONE
 ])
 
 
